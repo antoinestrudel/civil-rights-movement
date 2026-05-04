@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Civil Rights Movement — A Timeline</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #0a0702;
+    --parchment: #EDE5D0;
+    --ink: #2b1e0f;
+    --ink-mid: #8d6f3c;
+    --ink-light: #e6b162;
+    --gold: #C9973A;
+    --gold-light: #E8C876;
+    --gold-pale: #F5E9C8;
+    --rust: #8B3A1A;
+    --rust-light: #C4622D;
+    --forest: #2A4A2E;
+    --accent-blue: #1B4F8A;
+    --serif: 'Playfair Display', Georgia, serif;
+    --body-serif: 'Libre Baskerville', Georgia, serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: var(--body-serif);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* ─── PROGRESS BAR ───
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: var(--gold);
+    z-index: 200;
+    transition: width 0.1s linear;
+  } */
+
+  /* ─── NAV ─── */
+  .sticky-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    background: rgba(26,18,8,0.95);
+    border-bottom: 1px solid rgba(201,151,58,0.3);
+    padding: 0.8rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transform: translateY(-100%);
+    transition: transform 0.4s ease;
+  }
+  .sticky-nav.shown { transform: translateY(0); }
+  .nav-logo { font-family: var(--serif); font-size: 0.95rem; font-weight: 700; color: var(--gold); }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(245,240,232,0.6); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--ink);
+    overflow: hidden;
+  }
+  .hero-bg-text {
+    position: absolute;
+    font-family: var(--serif);
+    font-size: clamp(120px, 22vw, 280px);
+    font-weight: 900;
+    color: rgba(255,255,255,0.04);
+    letter-spacing: -0.04em;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; position: relative; z-index: 1; }
+  .hero h1 { font-family: var(--serif); font-size: clamp(3rem, 8vw, 7rem); font-weight: 900; line-height: 1.0; color: var(--cream); position: relative; z-index: 1; max-width: 900px; }
+  .hero h1 em { font-style: italic; color: var(--gold-light); }
+  .hero-divider { width: 80px; height: 2px; background: var(--gold); margin: 2.5rem auto; position: relative; z-index: 1; }
+  .hero-sub { font-family: var(--body-serif); font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(245,240,232,0.65); max-width: 560px; margin-top: 1.5rem; line-height: 1.8; position: relative; z-index: 1; font-style: italic; }
+  .hero-dates { font-family: var(--mono); font-size: 13px; color: var(--gold-light); letter-spacing: 0.1em; position: relative; z-index: 1; }
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 1;
+    animation: bounce 2.5s ease-in-out infinite;
+  }
+  .scroll-hint span { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,240,232,0.4); }
+  .scroll-arrow { width: 20px; height: 20px; border-right: 1.5px solid rgba(201,151,58,0.6); border-bottom: 1.5px solid rgba(201,151,58,0.6); transform: rotate(45deg); }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  /* ─── INTRO ─── */
+  .intro { max-width: 780px; margin: 0 auto; padding: 6rem 2rem 4rem; text-align: center; position: relative; z-index: 1; }
+  .intro p { font-size: 1.15rem; color: var(--ink-mid); line-height: 1.9; }
+  .intro p strong { color: var(--gold-light); font-weight: 700; }
+
+  /* ─── DECADE HEADERS ─── */
+  .decade-header { position: relative; text-align: center; padding: 5rem 2rem 3rem; z-index: 1; }
+  .decade-label { font-family: var(--serif); font-size: clamp(4rem, 12vw, 10rem); font-weight: 900; color: var(--parchment); line-height: 1; position: relative; }
+  .decade-label::after { content: attr(data-decade); position: absolute; top: 4px; left: 50%; transform: translateX(-50%); color: var(--gold); font-size: 0.18em; font-family: var(--mono); letter-spacing: 0.3em; text-transform: uppercase; font-weight: 400; white-space: nowrap; }
+  .decade-desc { font-family: var(--body-serif); font-style: italic; color: var(--ink-light); font-size: 1rem; max-width: 500px; margin: 1rem auto 0; }
+
+  /* ─── TIMELINE CONTAINER ─── */
+  .timeline-container {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+    z-index: 1;
+  }
+
+  /* The static grey track — always visible as a faint guide */
+  .timeline-track {
+    position: absolute;
+    left: 50%;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: rgba(201,151,58,0.12);
+    transform: translateX(-50%);
+    z-index: 0;
+  }
+
+  /* The animated gold fill — grows downward via JS */
+  .timeline-fill {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 2px;
+    height: 0;          /* driven by JS */
+    background: linear-gradient(to bottom, var(--gold), var(--gold-light));
+    transform: translateX(-50%);
+    z-index: 1;
+    transition: height 0.05s linear;
+  }
+
+  /* ─── TIMELINE EVENT ─── */
+  .timeline-event {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    align-items: start;
+    margin-bottom: 3.5rem;
+    position: relative;
+  }
+
+  .timeline-event:nth-child(even) .event-content { grid-column: 1; text-align: right; padding-right: 2.5rem; }
+  .timeline-event:nth-child(even) .event-empty   { grid-column: 3; }
+  .timeline-event:nth-child(odd)  .event-content { grid-column: 3; text-align: left;  padding-left:  2.5rem; }
+  .timeline-event:nth-child(odd)  .event-empty   { grid-column: 1; }
+
+  /* ─── NODE ─── */
+  .event-node-col {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0.5rem;
+    position: relative;
+    z-index: 3;
+  }
+
+  .event-node {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--cream);          /* starts unlit */
+    border: 3px solid rgba(201,151,58,0.3);
+    box-shadow: none;
+    flex-shrink: 0;
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  /* Lit state — applied by JS when line reaches the dot */
+  .event-node.lit {
+    background: var(--gold);
+    border-color: var(--cream);
+    box-shadow: 0 0 0 2px var(--gold);
+  }
+
+  .timeline-event:hover .event-node.lit {
+    transform: scale(1.4);
+    background: var(--rust-light);
+    box-shadow: 0 0 0 2px var(--rust-light);
+  }
+
+  .event-content { grid-row: 1; }
+
+  /* ─── YEAR LABEL ─── */
+  .event-year {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  /* ─── CARD — hidden until triggered ─── */
+  .event-card {
+    background: white;
+    border: 1px solid rgba(201,151,58,0.2);
+    border-radius: 3px;
+    padding: 1.4rem 1.6rem;
+    position: relative;
+    cursor: pointer;
+
+    /* Hidden state */
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.45s ease, transform 0.45s ease,
+                box-shadow 0.3s ease, border-color 0.3s ease;
+    pointer-events: none;
+  }
+
+  /* Revealed state — toggled by JS */
+  .event-card.revealed {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .event-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(26,18,8,0.1);
+    border-color: rgba(201,151,58,0.5);
+  }
+
+  /* Card arrows */
+  .timeline-event:nth-child(even) .event-card::after  { content:''; position:absolute; right:-8px;  top:16px; width:0; height:0; border-top:7px solid transparent; border-bottom:7px solid transparent; border-left:8px solid white; }
+  .timeline-event:nth-child(even) .event-card::before { content:''; position:absolute; right:-10px; top:15px; width:0; height:0; border-top:8px solid transparent; border-bottom:8px solid transparent; border-left:9px solid rgba(201,151,58,0.2); }
+  .timeline-event:nth-child(odd)  .event-card::after  { content:''; position:absolute; left:-8px;   top:16px; width:0; height:0; border-top:7px solid transparent; border-bottom:7px solid transparent; border-right:8px solid white; }
+  .timeline-event:nth-child(odd)  .event-card::before { content:''; position:absolute; left:-10px;  top:15px; width:0; height:0; border-top:8px solid transparent; border-bottom:8px solid transparent; border-right:9px solid rgba(201,151,58,0.2); }
+
+  .event-title { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; color: var(--ink); line-height: 1.35; margin-bottom: 8px; }
+  .event-body  { font-size: 0.88rem; color: var(--ink-mid); line-height: 1.75; }
+
+  .event-tag { display: inline-block; font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; margin-top: 10px; }
+  .tag-legal       { background: #E8F0FA; color: var(--accent-blue); }
+  .tag-protest     { background: #FAE8E8; color: var(--rust); }
+  .tag-legislation { background: #E8F5EA; color: var(--forest); }
+  .tag-leadership  { background: #FBF3E2; color: #7A5C1A; }
+  .tag-violence    { background: #F7EAE8; color: #7A2A14; }
+  .tag-landmark    { background: #F0EBF8; color: #5A3A8A; }
+
+  /* ─── QUOTE BREAKS ─── */
+  .quote-break {
+    padding: 5rem 2rem; text-align: center; position: relative; z-index: 1;
+    max-width: 800px; margin: 0 auto;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .quote-break.visible { opacity: 1; transform: translateY(0); }
+  .quote-mark { font-family: var(--serif); font-size: 8rem; line-height: 0.5; color: var(--gold-light); display: block; margin-bottom: 1rem; }
+  .quote-text { font-family: var(--serif); font-size: clamp(1.4rem, 3.5vw, 2.2rem); font-style: italic; font-weight: 400; color: var(--ink-light); line-height: 1.5; }
+  .quote-attr { margin-top: 1.5rem; font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-light); }
+  .quote-rule { width: 60px; height: 1.5px; background: var(--gold); margin: 1.5rem auto 0; }
+
+  /* ─── MODAL ─── */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(26,18,8,0.82); z-index: 100; display: none; align-items: center; justify-content: center; padding: 2rem; backdrop-filter: blur(2px); }
+  .modal-overlay.open { display: flex; }
+  .modal-box { background: var(--cream); max-width: 640px; width: 100%; border-radius: 4px; padding: 2.5rem; position: relative; max-height: 85vh; overflow-y: auto; animation: modalIn 0.3s ease; }
+  @keyframes modalIn { from{transform:scale(0.94) translateY(10px);opacity:0} to{transform:scale(1) translateY(0);opacity:1} }
+  .modal-year { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem; }
+  .modal-title { font-family: var(--serif); font-size: 1.8rem; font-weight: 700; color: var(--ink); line-height: 1.25; margin-bottom: 1rem; }
+  .modal-divider { height: 2px; background: var(--gold-pale); margin: 1rem 0 1.5rem; }
+  .modal-body { font-family: var(--body-serif); font-size: 0.95rem; color: var(--ink-mid); line-height: 1.9; }
+  .modal-people { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--parchment); }
+  .modal-people-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px; }
+  .modal-people-list { font-family: var(--body-serif); font-size: 0.88rem; color: var(--ink); font-style: italic; }
+  .modal-close { position: absolute; top: 1.2rem; right: 1.4rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--ink-light); line-height: 1; padding: 4px 8px; border-radius: 2px; transition: color 0.2s, background 0.2s; }
+  .modal-close:hover { color: var(--ink); background: var(--parchment); }
+
+  /* ─── FOOTER ─── */
+  .footer { background: var(--ink); color: var(--cream); text-align: center; padding: 4rem 2rem; position: relative; z-index: 1; }
+  .footer-title { font-family: var(--serif); font-size: 1.4rem; font-style: italic; color: var(--gold-light); margin-bottom: 1rem; }
+  .footer-body { font-family: var(--body-serif); font-size: 0.88rem; color: rgba(245,240,232,0.5); max-width: 500px; margin: 0 auto; line-height: 1.8; }
+  .footer-line { width: 60px; height: 1px; background: var(--gold); margin: 2rem auto; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 700px) {
+    .timeline-track, .timeline-fill { left: 24px; }
+    .timeline-event { grid-template-columns: 48px 1fr; }
+    .timeline-event:nth-child(even) .event-content,
+    .timeline-event:nth-child(odd)  .event-content { grid-column: 2; grid-row: 1; text-align: left; padding-left: 1.5rem; padding-right: 0; }
+    .event-node-col { grid-column: 1; grid-row: 1; }
+    .event-empty { display: none; }
+    .timeline-event:nth-child(even) .event-card::after,
+    .timeline-event:nth-child(even) .event-card::before,
+    .timeline-event:nth-child(odd)  .event-card::after,
+    .timeline-event:nth-child(odd)  .event-card::before { display: none; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="sticky-nav" id="stickyNav">
+  <div class="nav-logo">The Civil Rights Movement</div>
+  <ul class="nav-links">
+    <li><a href="#s1950">1950s</a></li>
+    <li><a href="#s1960">1960s</a></li>
+    <li><a href="#s1965">Mid-Decade</a></li>
+    <li><a href="#s1968">Late 1960s</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg-text">RISE</div>
+  <p class="hero-eyebrow">1954 — 1968 &amp; Beyond</p>
+  <h1>The Civil <em>Rights</em> Movement</h1>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">A chronicle of courage, sacrifice, and the long march toward justice in America</p>
+  <p class="hero-dates">Scroll to explore the timeline</p>
+  <div class="scroll-hint"><span>Scroll</span><div class="scroll-arrow"></div></div>
+</section>
+
+<section class="intro">
+  <p>The Civil Rights Movement was a <strong>decades-long struggle</strong> by African Americans and their allies to end institutionalized racial discrimination, disenfranchisement, and racial segregation in the United States. Through nonviolent protest, legal challenges, and extraordinary personal bravery, ordinary people changed the moral fabric of a nation.</p>
+</section>
+
+<!-- ══════════ 1950s ══════════ -->
+<div id="s1950" class="decade-header">
+  <div class="decade-label" data-decade="The Foundation">1950s</div>
+  <p class="decade-desc">The seeds of resistance — court victories, boycotts, and a movement finding its voice</p>
+</div>
+
+<div class="timeline-container">
+  <div class="timeline-track"></div>
+  <div class="timeline-fill"></div>
+
+  <div class="timeline-event"
+       data-title="Brown v. Board of Education"
+       data-year="May 17, 1954"
+       data-body="The Supreme Court unanimously ruled in Brown v. Board of Education that racial segregation in public schools was unconstitutional, overturning the 1896 Plessy v. Ferguson 'separate but equal' doctrine. Chief Justice Earl Warren declared that 'separate educational facilities are inherently unequal.' This landmark ruling energized the civil rights movement by establishing that segregation itself — not merely unequal facilities — violated the Constitution."
+       data-people="Thurgood Marshall (NAACP lead attorney), Chief Justice Earl Warren, Linda Brown">
+    <div class="event-empty"></div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-content">
+      <span class="event-year">May 17, 1954</span>
+      <div class="event-card">
+        <div class="event-title">Brown v. Board of Education</div>
+        <div class="event-body">The Supreme Court unanimously ruled that racial segregation in public schools was unconstitutional, striking down "separate but equal." A legal revolution in three words: <em>separate is unequal.</em></div>
+        <span class="event-tag tag-legal">Supreme Court</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline-event"
+       data-title="Murder of Emmett Till"
+       data-year="August 28, 1955"
+       data-body="Emmett Till, a 14-year-old Black boy from Chicago visiting relatives in Money, Mississippi, was abducted, brutally tortured, and murdered by Roy Bryant and J.W. Milam. His mother, Mamie Till-Mobley, made the courageous decision to hold an open-casket funeral so the world could see what had been done to her son. Tens of thousands viewed his body. The acquittal of the killers by an all-white jury outraged the nation and galvanized the civil rights movement."
+       data-people="Emmett Till, Mamie Till-Mobley, Roy Bryant, J.W. Milam">
+    <div class="event-content">
+      <span class="event-year">August 28, 1955</span>
+      <div class="event-card">
+        <div class="event-title">Murder of Emmett Till</div>
+        <div class="event-body">The brutal lynching of 14-year-old Emmett Till in Mississippi, and his mother's decision to hold an open-casket funeral, shocked the conscience of the nation and galvanized the movement.</div>
+        <span class="event-tag tag-violence">Racial Violence</span>
+      </div>
+    </div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-empty"></div>
+  </div>
+
+  <div class="timeline-event"
+       data-title="Montgomery Bus Boycott Begins"
+       data-year="December 5, 1955"
+       data-body="Four days after Rosa Parks was arrested for refusing to give up her bus seat to a white passenger, the Black community of Montgomery, Alabama launched a citywide bus boycott. Led by the newly formed Montgomery Improvement Association and the 26-year-old Rev. Dr. Martin Luther King Jr., over 40,000 Black residents refused to ride city buses for 381 days. The boycott ended when the Supreme Court ruled that bus segregation was unconstitutional in November 1956."
+       data-people="Rosa Parks, Dr. Martin Luther King Jr., E.D. Nixon, Jo Ann Robinson">
+    <div class="event-empty"></div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-content">
+      <span class="event-year">December 5, 1955</span>
+      <div class="event-card">
+        <div class="event-title">Montgomery Bus Boycott</div>
+        <div class="event-body">Following Rosa Parks' arrest, 40,000 Black residents boycotted Montgomery's buses for 381 days. A young pastor named Dr. Martin Luther King Jr. emerged as their leader.</div>
+        <span class="event-tag tag-protest">Nonviolent Protest</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline-event"
+       data-title="Little Rock Nine"
+       data-year="September 4, 1957"
+       data-body="Nine Black students — Ernest Green, Elizabeth Eckford, Jefferson Thomas, Terrence Roberts, Carlotta Walls LaNier, Minnijean Brown, Gloria Ray Karlmark, Thelma Mothershed, and Melba Pattillo Beals — attempted to enroll at Central High School in Little Rock, Arkansas. Governor Orval Faubus called in the National Guard to block their entry. President Eisenhower federalized the Arkansas National Guard and deployed the 101st Airborne Division to enforce integration."
+       data-people="The Little Rock Nine, Gov. Orval Faubus, President Eisenhower, Daisy Bates">
+    <div class="event-content">
+      <span class="event-year">September 4, 1957</span>
+      <div class="event-card">
+        <div class="event-title">The Little Rock Nine</div>
+        <div class="event-body">Nine Black students bravely attempted to integrate Little Rock Central High School. Governor Faubus called the National Guard to block them; President Eisenhower deployed federal troops to enforce their right to enter.</div>
+        <span class="event-tag tag-landmark">School Integration</span>
+      </div>
+    </div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-empty"></div>
+  </div>
+
+  <div class="timeline-event"
+       data-title="Civil Rights Act of 1957"
+       data-year="September 9, 1957"
+       data-body="Signed by President Eisenhower, the Civil Rights Act of 1957 was the first civil rights legislation enacted by Congress since Reconstruction. It established the Civil Rights Division within the Justice Department and created the Commission on Civil Rights. While relatively weak, it represented the first step by the federal government to protect Black voting rights in the 20th century."
+       data-people="President Dwight D. Eisenhower, Senate Majority Leader Lyndon B. Johnson">
+    <div class="event-empty"></div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-content">
+      <span class="event-year">September 9, 1957</span>
+      <div class="event-card">
+        <div class="event-title">Civil Rights Act of 1957</div>
+        <div class="event-body">The first federal civil rights legislation since Reconstruction, establishing the Civil Rights Division of the Justice Department. Modest in scope but significant in principle — the federal government was back.</div>
+        <span class="event-tag tag-legislation">Federal Law</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="quote-break">
+  <span class="quote-mark">&ldquo;</span>
+  <p class="quote-text">Injustice anywhere is a threat to justice everywhere.</p>
+  <p class="quote-attr">— Dr. Martin Luther King Jr., Letter from Birmingham Jail, 1963</p>
+  <div class="quote-rule"></div>
+</div>
+
+<!-- ══════════ 1960s ══════════ -->
+<div id="s1960" class="decade-header">
+  <div class="decade-label" data-decade="The Uprising">1960s</div>
+  <p class="decade-desc">Direct action, sit-ins, and freedom rides — confronting hatred with disciplined courage</p>
+</div>
+
+<div class="timeline-container">
+  <div class="timeline-track"></div>
+  <div class="timeline-fill"></div>
+
+  <div class="timeline-event"
+       data-title="Greensboro Sit-Ins"
+       data-year="February 1, 1960"
+       data-body="Four Black college freshmen — Ezell Blair Jr., David Richmond, Franklin McCain, and Joseph McNeil — sat down at the whites-only lunch counter at Woolworth's in Greensboro, North Carolina, and politely asked to be served. When refused, they remained seated until closing time. By the end of the week, hundreds of students joined in. The sit-in spread to 54 cities across the South. By July 1960, Greensboro's Woolworth's desegregated its lunch counter."
+       data-people="Ezell Blair Jr. (Jibreel Khazan), David Richmond, Franklin McCain, Joseph McNeil">
+    <div class="event-content">
+      <span class="event-year">February 1, 1960</span>
+      <div class="event-card">
+        <div class="event-title">Greensboro Sit-Ins</div>
+        <div class="event-body">Four Black college students sat at a whites-only Woolworth's lunch counter. When refused service, they stayed. Within weeks, hundreds joined. Within months, the tactic had spread to 54 cities.</div>
+        <span class="event-tag tag-protest">Nonviolent Protest</span>
+      </div>
+    </div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-empty"></div>
+  </div>
+
+  <div class="timeline-event"
+       data-title="SNCC Founded"
+       data-year="April 15, 1960"
+       data-body="At Shaw University in Raleigh, North Carolina, student activists formed the Student Nonviolent Coordinating Committee (SNCC). Inspired by Ella Baker, SNCC became one of the most important organizations in the movement. Under leaders like John Lewis and Stokely Carmichael, SNCC organized voter registration drives, freedom rides, and other direct actions."
+       data-people="Ella Baker, John Lewis, Diane Nash, Stokely Carmichael, James Lawson">
+    <div class="event-empty"></div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-content">
+      <span class="event-year">April 15, 1960</span>
+      <div class="event-card">
+        <div class="event-title">SNCC Founded</div>
+        <div class="event-body">The Student Nonviolent Coordinating Committee was born out of the sit-in movement. Young activists — independent, bold, and uncompromising — would become the movement's most daring frontline force.</div>
+        <span class="event-tag tag-leadership">Organization</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline-event"
+       data-title="Freedom Rides"
+       data-year="May 4, 1961"
+       data-body="Interracial groups of 'Freedom Riders' boarded interstate buses to challenge the non-enforcement of Supreme Court decisions outlawing racial segregation in interstate travel. In Anniston, Alabama, one bus was firebombed and riders beaten. In Birmingham and Montgomery, riders were attacked by white mobs while local police stood by. The Freedom Rides ultimately forced the Interstate Commerce Commission to enforce desegregation of all bus and train terminals."
+       data-people="John Lewis, Diane Nash, James Farmer, James Peck, Genevieve Hughes">
+    <div class="event-content">
+      <span class="event-year">May 4, 1961</span>
+      <div class="event-card">
+        <div class="event-title">Freedom Rides</div>
+        <div class="event-body">Interracial groups boarded buses into the Deep South to challenge segregated travel. Riders faced firebombings and mob violence in Alabama. Their courage forced federal desegregation of interstate transit facilities.</div>
+        <span class="event-tag tag-protest">Direct Action</span>
+      </div>
+    </div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-empty"></div>
+  </div>
+
+  <div class="timeline-event"
+       data-title="Birmingham Campaign"
+       data-year="April 3, 1963"
+       data-body="The Birmingham Campaign was a coordinated nonviolent direct-action campaign in Birmingham, Alabama. Protesters, including children, faced fire hoses and police dogs at the orders of Public Safety Commissioner Bull Connor. Dr. King was jailed and wrote his famous 'Letter from Birmingham Jail.' The campaign galvanized national support for federal civil rights legislation."
+       data-people="Dr. Martin Luther King Jr., Bull Connor, Fred Shuttlesworth, Diane Nash, James Bevel">
+    <div class="event-empty"></div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-content">
+      <span class="event-year">April 3, 1963</span>
+      <div class="event-card">
+        <div class="event-title">Birmingham Campaign</div>
+        <div class="event-body">Children and adults faced Bull Connor's fire hoses and police dogs. Dr. King was jailed and penned his immortal "Letter from Birmingham Jail." The world watched, and could no longer look away.</div>
+        <span class="event-tag tag-protest">Direct Action</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline-event"
+       data-title="Medgar Evers Assassinated"
+       data-year="June 12, 1963"
+       data-body="Medgar Evers, the NAACP's first field secretary in Mississippi, was shot in his driveway in Jackson by white supremacist Byron De La Beckwith. Evers had spent years registering voters, investigating racial crimes, and organizing boycotts. He died in the early hours of June 12. De La Beckwith was finally convicted of murder in 1994 — 31 years later."
+       data-people="Medgar Evers, Myrlie Evers-Williams, Byron De La Beckwith">
+    <div class="event-content">
+      <span class="event-year">June 12, 1963</span>
+      <div class="event-card">
+        <div class="event-title">Assassination of Medgar Evers</div>
+        <div class="event-body">NAACP field secretary Medgar Evers was shot in his driveway by a white supremacist. His killer walked free for 31 years. Evers had given everything to the cause of voter registration and equality.</div>
+        <span class="event-tag tag-violence">Assassination</span>
+      </div>
+    </div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-empty"></div>
+  </div>
+
+  <div class="timeline-event"
+       data-title="March on Washington"
+       data-year="August 28, 1963"
+       data-body="More than 250,000 people gathered at the National Mall for the March on Washington for Jobs and Freedom — the largest political rally in American history to that point. Dr. King delivered his 'I Have a Dream' speech from the steps of the Lincoln Memorial, articulating the movement's vision of a racially just America. The march helped propel the Civil Rights Act of 1964."
+       data-people="Dr. Martin Luther King Jr., Bayard Rustin, A. Philip Randolph, John Lewis, Josephine Baker, Mahalia Jackson">
+    <div class="event-empty"></div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-content">
+      <span class="event-year">August 28, 1963</span>
+      <div class="event-card">
+        <div class="event-title">March on Washington</div>
+        <div class="event-body">250,000 people stood before the Lincoln Memorial. Dr. King declared: <em>"I have a dream."</em> It became the most iconic speech in American history and the moral heart of the movement.</div>
+        <span class="event-tag tag-landmark">Historic March</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline-event"
+       data-title="16th Street Baptist Church Bombing"
+       data-year="September 15, 1963"
+       data-body="Members of the Ku Klux Klan planted 19 sticks of dynamite at the 16th Street Baptist Church in Birmingham. The bomb exploded during Sunday morning services, killing four young girls: Addie Mae Collins (14), Cynthia Wesley (14), Carole Robertson (14), and Carol Denise McNair (11). Three perpetrators were finally convicted decades later, the last in 2002."
+       data-people="Addie Mae Collins, Cynthia Wesley, Carole Robertson, Carol Denise McNair, Robert Chambliss, Thomas Blanton, Bobby Frank Cherry">
+    <div class="event-content">
+      <span class="event-year">September 15, 1963</span>
+      <div class="event-card">
+        <div class="event-title">16th Street Baptist Church Bombing</div>
+        <div class="event-body">A KKK bomb killed four young girls — Addie Mae Collins, Cynthia Wesley, Carole Robertson, and Carol Denise McNair — during Sunday services in Birmingham. The nation wept and demanded action.</div>
+        <span class="event-tag tag-violence">Racial Terror</span>
+      </div>
+    </div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-empty"></div>
+  </div>
+</div>
+
+<div class="quote-break">
+  <span class="quote-mark">&ldquo;</span>
+  <p class="quote-text">We shall overcome because the arc of the moral universe is long, but it bends toward justice.</p>
+  <p class="quote-attr">— Dr. Martin Luther King Jr., 1965</p>
+  <div class="quote-rule"></div>
+</div>
+
+<!-- ══════════ 1964–1965 ══════════ -->
+<div id="s1965" class="decade-header">
+  <div class="decade-label" data-decade="Legislative Victories">1964–1965</div>
+  <p class="decade-desc">Hard-won laws change the fabric of American democracy</p>
+</div>
+
+<div class="timeline-container">
+  <div class="timeline-track"></div>
+  <div class="timeline-fill"></div>
+
+  <div class="timeline-event"
+       data-title="Civil Rights Act of 1964"
+       data-year="July 2, 1964"
+       data-body="President Lyndon B. Johnson signed the Civil Rights Act of 1964, the most sweeping civil rights legislation since Reconstruction. The act prohibited discrimination based on race, color, religion, sex, or national origin in employment, public accommodations, and federally assisted programs. It created the Equal Employment Opportunity Commission (EEOC). The passage came after a 60-day filibuster by Southern senators, the longest in Senate history."
+       data-people="President Lyndon B. Johnson, Hubert Humphrey, Everett Dirksen, Dr. Martin Luther King Jr.">
+    <div class="event-content">
+      <span class="event-year">July 2, 1964</span>
+      <div class="event-card">
+        <div class="event-title">Civil Rights Act of 1964</div>
+        <div class="event-body">Signed by President Johnson after a 60-day Senate filibuster, this landmark law banned discrimination in employment and public life based on race, color, religion, sex, or national origin. A seismic legal transformation.</div>
+        <span class="event-tag tag-legislation">Federal Law</span>
+      </div>
+    </div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-empty"></div>
+  </div>
+
+  <div class="timeline-event"
+       data-title="Mississippi Freedom Summer"
+       data-year="Summer 1964"
+       data-body="Freedom Summer was a voter registration campaign in which hundreds of mostly white Northern college students traveled to Mississippi to help register Black voters. Three workers — Michael Schwerner, Andrew Goodman, and James Chaney — were murdered by Klan members with the complicity of local law enforcement. The murders drew national outrage and built the foundation for the Voting Rights Act."
+       data-people="Michael Schwerner, Andrew Goodman, James Chaney, Bob Moses, Fannie Lou Hamer">
+    <div class="event-empty"></div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-content">
+      <span class="event-year">Summer 1964</span>
+      <div class="event-card">
+        <div class="event-title">Mississippi Freedom Summer</div>
+        <div class="event-body">Hundreds of volunteers came to Mississippi to register voters. Three workers — Schwerner, Goodman, and Chaney — were murdered by the Klan. Their deaths shocked the nation into demanding the Voting Rights Act.</div>
+        <span class="event-tag tag-violence">Voter Registration</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline-event"
+       data-title="Selma to Montgomery — Bloody Sunday"
+       data-year="March 7, 1965"
+       data-body="On Bloody Sunday, 600 peaceful marchers led by John Lewis and Hosea Williams crossed the Edmund Pettus Bridge, where state troopers attacked them with clubs and tear gas on national television. John Lewis's skull was fractured. Two weeks later, Dr. King led 25,000 marchers to Montgomery. The footage was pivotal in securing passage of the Voting Rights Act."
+       data-people="John Lewis, Hosea Williams, Dr. Martin Luther King Jr., Amelia Boynton Robinson, Gov. George Wallace">
+    <div class="event-content">
+      <span class="event-year">March 7, 1965</span>
+      <div class="event-card">
+        <div class="event-title">Bloody Sunday — Selma</div>
+        <div class="event-body">State troopers attacked 600 peaceful marchers with clubs and tear gas on the Edmund Pettus Bridge as television cameras rolled. John Lewis's skull was fractured. America watched. Congress acted.</div>
+        <span class="event-tag tag-landmark">Historic March</span>
+      </div>
+    </div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-empty"></div>
+  </div>
+
+  <div class="timeline-event"
+       data-title="Voting Rights Act of 1965"
+       data-year="August 6, 1965"
+       data-body="President Johnson signed the Voting Rights Act of 1965, one of the most effective pieces of civil rights legislation in American history. The act prohibited discriminatory voting practices including literacy tests. Within three years, almost a million Black voters were registered in the South."
+       data-people="President Lyndon B. Johnson, Dr. Martin Luther King Jr., John Lewis, Rep. John Conyers">
+    <div class="event-empty"></div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-content">
+      <span class="event-year">August 6, 1965</span>
+      <div class="event-card">
+        <div class="event-title">Voting Rights Act of 1965</div>
+        <div class="event-body">The most powerful voting rights legislation in American history — banning literacy tests and all discriminatory voter barriers. Within three years, nearly one million Black Southerners were newly registered to vote.</div>
+        <span class="event-tag tag-legislation">Federal Law</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="quote-break">
+  <span class="quote-mark">&ldquo;</span>
+  <p class="quote-text">Do not get lost in a sea of despair. Be hopeful, be optimistic. Our struggle is not the struggle of a day, a week, a month, or a year — it is the struggle of a lifetime.</p>
+  <p class="quote-attr">— Rep. John Lewis</p>
+  <div class="quote-rule"></div>
+</div>
+
+<!-- ══════════ LATE 1960s ══════════ -->
+<div id="s1968" class="decade-header">
+  <div class="decade-label" data-decade="Loss &amp; Legacy">Late 1960s</div>
+  <p class="decade-desc">Assassinations, uprisings, and the final milestones of a transformed nation</p>
+</div>
+
+<div class="timeline-container">
+  <div class="timeline-track"></div>
+  <div class="timeline-fill"></div>
+
+  <div class="timeline-event"
+       data-title="Watts Uprising"
+       data-year="August 11, 1965"
+       data-body="Five days after the signing of the Voting Rights Act, a traffic stop in the Watts neighborhood of Los Angeles sparked six days of rebellion. 34 people died, more than 1,000 were injured. The Watts uprising signaled that the civil rights struggle extended far beyond the South and would need to confront economic inequality."
+       data-people="Marquette Frye, Gov. Pat Brown, Chief William Parker, Bayard Rustin">
+    <div class="event-content">
+      <span class="event-year">August 11, 1965</span>
+      <div class="event-card">
+        <div class="event-title">Watts Uprising</div>
+        <div class="event-body">Five days after the Voting Rights Act was signed, six days of rebellion erupted in Los Angeles. Watts revealed that de facto segregation and poverty in Northern cities demanded a different kind of struggle entirely.</div>
+        <span class="event-tag tag-protest">Urban Uprising</span>
+      </div>
+    </div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-empty"></div>
+  </div>
+
+  <div class="timeline-event"
+       data-title="Black Power Movement"
+       data-year="June 1966"
+       data-body="During the 'March Against Fear' through Mississippi, SNCC chairman Stokely Carmichael publicly called for 'Black Power,' emphasizing racial pride, self-determination, and economic self-sufficiency. It inspired the Black Arts Movement and the Black Panther Party, founded in Oakland in October 1966 by Huey Newton and Bobby Seale."
+       data-people="Stokely Carmichael, Huey P. Newton, Bobby Seale, Eldridge Cleaver, Angela Davis">
+    <div class="event-empty"></div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-content">
+      <span class="event-year">June 1966</span>
+      <div class="event-card">
+        <div class="event-title">Black Power Movement</div>
+        <div class="event-body">Stokely Carmichael's call for "Black Power" marked a pivotal shift — from integration toward self-determination, racial pride, and community control. The Black Panther Party was founded in Oakland that October.</div>
+        <span class="event-tag tag-leadership">Movement Shift</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline-event"
+       data-title="Loving v. Virginia"
+       data-year="June 12, 1967"
+       data-body="The Supreme Court unanimously struck down Virginia's Racial Integrity Act and all anti-miscegenation laws in the United States. Mildred Loving, a Black woman, and Richard Loving, a white man, had been convicted simply for marrying. Chief Justice Warren affirmed that the freedom to marry is 'one of the vital personal rights essential to the orderly pursuit of happiness by free men.'"
+       data-people="Mildred Loving, Richard Loving, Chief Justice Earl Warren, Bernard Cohen">
+    <div class="event-content">
+      <span class="event-year">June 12, 1967</span>
+      <div class="event-card">
+        <div class="event-title">Loving v. Virginia</div>
+        <div class="event-body">The Supreme Court unanimously struck down all laws banning interracial marriage, affirming that "the freedom to marry" is a fundamental right. The case was brought by Mildred and Richard Loving, who simply wanted to live as a family in their home state.</div>
+        <span class="event-tag tag-legal">Supreme Court</span>
+      </div>
+    </div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-empty"></div>
+  </div>
+
+  <div class="timeline-event"
+       data-title="Assassination of Dr. Martin Luther King Jr."
+       data-year="April 4, 1968"
+       data-body="Dr. Martin Luther King Jr. was shot and killed on the balcony of the Lorraine Motel in Memphis, Tennessee, where he had gone to support striking sanitation workers. He was 39 years old. James Earl Ray was convicted of the murder. King's assassination triggered riots in over 100 American cities. He remains the most iconic figure of the American civil rights movement."
+       data-people="Dr. Martin Luther King Jr., Coretta Scott King, Ralph Abernathy, Jesse Jackson, James Earl Ray">
+    <div class="event-empty"></div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-content">
+      <span class="event-year">April 4, 1968</span>
+      <div class="event-card">
+        <div class="event-title">Assassination of Dr. King</div>
+        <div class="event-body">Dr. Martin Luther King Jr. was shot on the balcony of the Lorraine Motel in Memphis. He was 39. Riots erupted in over 100 cities. The world lost its greatest voice for nonviolent justice. His dream endured.</div>
+        <span class="event-tag tag-violence">Assassination</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline-event"
+       data-title="Fair Housing Act of 1968"
+       data-year="April 11, 1968"
+       data-body="One week after Dr. King's assassination, President Johnson signed the Civil Rights Act of 1968 — the Fair Housing Act. The law prohibited discrimination in the sale, rental, and financing of housing based on race, religion, and national origin. It was the final major legislation of the civil rights era."
+       data-people="President Lyndon B. Johnson, Sen. Edward Brooke, Rep. Emanuel Celler, George Romney">
+    <div class="event-content">
+      <span class="event-year">April 11, 1968</span>
+      <div class="event-card">
+        <div class="event-title">Fair Housing Act of 1968</div>
+        <div class="event-body">Signed one week after Dr. King's assassination, the Fair Housing Act prohibited racial discrimination in the sale and rental of housing — the final landmark legislation of the civil rights era.</div>
+        <span class="event-tag tag-legislation">Federal Law</span>
+      </div>
+    </div>
+    <div class="event-node-col"><div class="event-node"></div></div>
+    <div class="event-empty"></div>
+  </div>
+</div>
+
+<section class="intro">
+  <p>The Civil Rights Movement dismantled the legal architecture of American apartheid and fundamentally expanded the promise of democracy. The Civil Rights Act of 1964, the Voting Rights Act of 1965, and the Fair Housing Act of 1968 remain pillars of American law.</p>
+  <br>
+  <p>The work continued through the Black Power movement, affirmative action policies, the campaigns of Jesse Jackson, the election of Barack Obama in 2008, the birth of Black Lives Matter in 2013, and the massive racial justice protests of 2020. <strong>The struggle for justice is ongoing.</strong> The sacrifices of those who marched, sat in, bled, and died demand nothing less than our continued commitment.</p>
+</section>
+
+<footer class="footer">
+  <p class="footer-title">"If you can't fly then run, if you can't run then walk, if you can't walk then crawl, but whatever you do you have to keep moving forward.”</p>
+  <div class="footer-line"></div>
+  <p class="footer-body">This timeline covers key events of the Civil Rights Movement from 1954 to 1968. Click any event card to read the full story.</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Close">&#x2715;</button>
+    <p class="modal-year" id="modalYear"></p>
+    <h2 class="modal-title" id="modalTitle"></h2>
+    <div class="modal-divider"></div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-people">
+      <p class="modal-people-label">Key Figures</p>
+      <p class="modal-people-list" id="modalPeople"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+
+  /* ── Progress bar + sticky nav ── */
+  const progressBar = document.getElementById('progressBar');
+  const stickyNav   = document.getElementById('stickyNav');
+
+  /* ── Quote-break fade-in (simple scroll observer) ── */
+  const quoteObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); quoteObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.quote-break').forEach(el => quoteObs.observe(el));
+
+  /* ──────────────────────────────────────────────────
+     CORE ANIMATION — per timeline-container
+  ────────────────────────────────────────────────── */
+  const containers = Array.from(document.querySelectorAll('.timeline-container'));
+
+  containers.forEach(container => {
+    const fillEl  = container.querySelector('.timeline-fill');
+    const events  = Array.from(container.querySelectorAll('.timeline-event'));
+
+    /* Gather each event's node and card, and pre-compute their
+       offset relative to the TOP of the fill element (which sits
+       at the top of the container). We do this once after layout. */
+    let nodeData = []; // { node, card, triggerY }
+
+    function measureNodes() {
+      const fillTop = fillEl.getBoundingClientRect().top + window.scrollY;
+      nodeData = events.map(ev => {
+        const node = ev.querySelector('.event-node');
+        const card = ev.querySelector('.event-card');
+        const nodeRect = node.getBoundingClientRect();
+        const nodeCenterY = nodeRect.top + window.scrollY + nodeRect.height / 2;
+        return {
+          node,
+          card,
+          // how far down the fill needs to grow (px) to reach this dot's centre
+          triggerY: nodeCenterY - fillTop
+        };
+      });
+    }
+
+    measureNodes();
+    window.addEventListener('resize', measureNodes, { passive: true });
+
+    /* How far the fill should grow:
+       We want the tip of the gold line to track with the viewport's
+       "trigger point", which we place at 60% down the screen. */
+    function update() {
+      const fillEl_rect = fillEl.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      const totalHeight   = containerRect.height;
+
+      // How far past the top of the fill the trigger point is
+      // (trigger point = 60 % of viewport height)
+      const triggerPoint = window.innerHeight * 0.60;
+      const fillTopOnScreen = fillEl_rect.top; // relative to viewport
+      const drawn = Math.max(0, Math.min(totalHeight, triggerPoint - fillTopOnScreen));
+
+      fillEl.style.height = drawn + 'px';
+
+      // Light up each node + reveal card once the line passes the dot centre
+      nodeData.forEach(({ node, card, triggerY }) => {
+        if (drawn >= triggerY) {
+          if (!node.classList.contains('lit')) {
+            node.classList.add('lit');
+            // Small delay so the "pop" feels like a response to the line arriving
+            requestAnimationFrame(() => card.classList.add('revealed'));
+          }
+        } else {
+          // Optional: un-light when scrolling back up
+          node.classList.remove('lit');
+          card.classList.remove('revealed');
+        }
+      });
+    }
+
+    // Store update function so the main scroll handler can call all of them
+    container._update = update;
+  });
+
+  /* ── Main scroll handler ── */
+  function onScroll() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    progressBar.style.width = (scrollTop / docHeight * 100) + '%';
+    stickyNav.classList.toggle('shown', scrollTop > window.innerHeight * 0.6);
+
+    containers.forEach(c => c._update && c._update());
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // run once on load
+
+  /* ── Modal ── */
+  const overlay     = document.getElementById('modalOverlay');
+  const modalYear   = document.getElementById('modalYear');
+  const modalTitle  = document.getElementById('modalTitle');
+  const modalBody   = document.getElementById('modalBody');
+  const modalPeople = document.getElementById('modalPeople');
+
+  document.querySelectorAll('.timeline-event').forEach(ev => {
+    ev.querySelector('.event-card').addEventListener('click', () => {
+      modalYear.textContent   = ev.dataset.year;
+      modalTitle.textContent  = ev.dataset.title;
+      modalBody.textContent   = ev.dataset.body;
+      modalPeople.textContent = ev.dataset.people;
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+})();
+</script>
+</body>
+</html>
